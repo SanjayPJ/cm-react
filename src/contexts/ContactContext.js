@@ -1,12 +1,8 @@
-import React from 'react';
-import Navbar from './components/Navbar'
-import Contact from './components/Contact'
-import Contents from './components/Contents'
-import './App.css'
-import ContactContextProvider from './contexts/ContactContext'
+import React, { createContext } from 'react';
 
-export default class App extends React.Component {
+export const ContactContext = createContext();
 
+class ContactContextProvider extends React.Component {
     state = {
         contacts: [{
                 "id": 1,
@@ -57,26 +53,13 @@ export default class App extends React.Component {
         ]
     }
 
-    deleteClickHandler = (id) => {
-        const { contacts } = this.state
-        const newContacts = contacts.filter(contact => contact.id !== id);
-        this.setState({
-            contacts: newContacts
-        })
-    }
-
     render() {
-        const { contacts } = this.state
         return (
-            <ContactContextProvider>
-              <Navbar title="Contact Manager"/>
-              <div className="container">
-              {contacts.map(contact => (
-                <Contact deleteClickHandler={this.deleteClickHandler.bind(this, contact.id)} key={contact.id} name={contact.name} email={contact.email} phone={contact.phone}/>
-                ))}
-              </div>
-              <Contents />
-        </ContactContextProvider>
+            <ContactContext.Provider value={{...this.state}}>
+            	{this.props.children}
+        	</ContactContext.Provider>
         );
     }
 }
+
+export default ContactContextProvider;
