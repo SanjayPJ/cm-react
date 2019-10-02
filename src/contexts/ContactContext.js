@@ -53,9 +53,21 @@ class ContactContextProvider extends React.Component {
         ]
     }
 
+    changeState = () => {
+        this.setState({
+            contacts: [{
+                "id": 2,
+                "name": "Ervin Howell",
+                "email": "Shanna@melissa.tv",
+                "phone": "010-692-6593 x09125",
+            }]
+        });
+        console.log(123)
+    }
+
     render() {
         return (
-            <ContactContext.Provider value={{...this.state}}>
+            <ContactContext.Provider value={{...this.state, changeState: this.changeState}}>
             	{this.props.children}
         	</ContactContext.Provider>
         );
