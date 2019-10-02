@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './components/Navbar'
 import Contact from './components/Contact'
 import Contents from './components/Contents'
+import AddContact from './components/AddContact1'
 import './App.css'
 import ContactContextProvider from './contexts/ContactContext'
 
@@ -70,6 +71,7 @@ export default class App extends React.Component {
         return (
             <ContactContextProvider>
               <Navbar title="Contact Manager"/>
+              <AddContact />
               <div className="container">
               {contacts.map(contact => (
                 <Contact deleteClickHandler={this.deleteClickHandler.bind(this, contact.id)} key={contact.id} name={contact.name} email={contact.email} phone={contact.phone}/>
