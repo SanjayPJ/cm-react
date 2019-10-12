@@ -1,6 +1,10 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 import Navbar from './components/Navbar'
 import Contact from './components/Contact'
+import About from './components/About'
+import NotFound from './components/NotFound'
 import Contents from './components/Contents'
 import AddContact from './components/AddContact1'
 import './App.css'
@@ -70,15 +74,16 @@ export default class App extends React.Component {
         const { contacts } = this.state
         return (
             <ContactContextProvider>
-              <Navbar title="Contact Manager"/>
-              <AddContact />
-              <div className="container">
-              {contacts.map(contact => (
-                <Contact deleteClickHandler={this.deleteClickHandler.bind(this, contact.id)} key={contact.id} name={contact.name} email={contact.email} phone={contact.phone}/>
-                ))}
-              </div>
-              <Contents />
-        </ContactContextProvider>
+                <Router>
+                    <Navbar title="Contact Manager"/>
+                    <Switch>
+                        <Route exact path="/" component={Contents} />
+                        <Route exact path="/about/:id" component={About} />
+                        <Route exact path="/contact/add" component={AddContact} />
+                        <Route component={NotFound} />
+                    </Switch>
+                </Router>
+            </ContactContextProvider>
         );
     }
 }

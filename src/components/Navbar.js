@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import PropTypes from 'prop-types'
 
 const Navbar = (props) => {
@@ -10,8 +11,14 @@ const Navbar = (props) => {
   </button>
   <div className="collapse navbar-collapse" id="navbarNav">
     <ul className="navbar-nav ml-auto">
-      <li className="nav-item active">
-        <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
+      <li className="nav-item">
+        <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link" to="/contact/add">Add Contact<span className="sr-only">(current)</span></Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link" to="/about">About<span className="sr-only">(current)</span></Link>
       </li>
     </ul>
   </div>
